@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { TextInput,Button,StyleSheet,Text,View,Alert } from 'react-native-web';
 import { enviarEmailPsw } from '../Axios/AxiosClient';
 
@@ -6,6 +6,7 @@ import { enviarEmailPsw } from '../Axios/AxiosClient';
 const Form = () => {
 
     const [aux,setAux]=useState(true);
+    const [token,setToken]=useState(true);
     const [obj, setObj] = useState({
             email: null,
             password: null,
@@ -17,13 +18,17 @@ const Form = () => {
     }
     else{
          setAux(true)
-       await enviarEmailPsw(obj)
+       setToken (await enviarEmailPsw(obj))
        console.log("datos ingresados")
     }
 }
 
     return (
-            <View>
+         
+            <View style={styles.container}>
+               
+                <Text style={styles.iniciarSesion}>Iniciar Sesíon</Text><br></br>
+                
                 {!aux &&
                     <Text>No ingreso los valores correspondientes</Text>
                 }
@@ -42,11 +47,28 @@ const Form = () => {
                 />
 
                 
-
+               
             </View>    
-        
+         
 
         )
         
 }
+const styles = StyleSheet.create({
+
+        iniciarSesion:{
+            fontSize: 75,
+            marginTop:'30px'
+            
+        },
+        container:{
+            flex: 1,
+            width: '800px',
+            height:'800px',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }
+
+  });
+  
 export default Form;
