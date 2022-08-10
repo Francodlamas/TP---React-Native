@@ -16,7 +16,7 @@ const Form = ({navigation}) => {
     
     if( obj.email==""||obj.password==""){
     setAux(false)
-
+    setBotonActiado(true)
     }
     else{
          setAux(true)
@@ -26,40 +26,33 @@ const Form = ({navigation}) => {
     }
 }
 
-    return (
-         
+    return (      
             <View style={styles.container}>
-               
-                <Text style={styles.iniciarSesion}>Iniciar Sesíon</Text><br></br>
                 
+                <Text style={styles.iniciarSesion}>Iniciar Sesíon</Text><br></br>
                 {!aux &&
                     <Text>No ingreso los valores correspondientes</Text>
                 }
-                 <TextInput
+                 <TextInput   style={styles.input}
                         title="Ingrese Usuario"
                         onChangeText={(value)=>{setObj({...obj,email: value})}}
                         value={obj.email}
                     />
-            
-                 <TextInput 
+                 <TextInput   style={styles.input}
                         onChangeText={(value)=>{setObj({...obj,password: value})}}       
                         value={obj.password}
                 />
-                 
-                <Button
-                onPress={validar }
+                <Button style={styles.button}
+                onPress={validar}
+                title="press"
+                disabled={!botonActivado}
                 />
                 
-
-                
-               
-            </View>    
-         
-
+           </View>            
         )
         
 }
-export default Form;
+
 const styles = StyleSheet.create({
 
         iniciarSesion:{
@@ -69,11 +62,27 @@ const styles = StyleSheet.create({
         },
         container:{
             flex: 1,
-            width: '800px',
-            height:'800px',
+            width: '100vw',
+            height:'100vh',
+            alignItems: 'center',
+            backgroundColor: "lightblue"
+        },
+        input: {
+            height: 40,
+            margin: 12,
+            borderWidth: 1,
+            padding: 10,
+          },
+          button: {
             alignItems: 'center',
             justifyContent: 'center',
-        }
+            paddingVertical: 12,
+            paddingHorizontal: 32,
+            borderRadius: 4,
+            elevation: 3,
+            backgroundColor: 'black',
+          },
 
   });
   
+  export default Form;

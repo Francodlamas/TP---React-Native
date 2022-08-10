@@ -22,3 +22,20 @@ export const enviarEmailPsw= async (obj) =>{
         throw err
     })
 }
+export const traerPlatos= async (query) =>{
+    return axiosClient.get('?query=' + query, {
+    }).then(response =>{
+        if(response.status < 300){
+            console.log(response.data)
+            return response.data
+        }
+        else {
+            console.log("Algo no funciona")
+        }
+    })
+    .catch(function(err) {
+        console.log("No funciona", err)
+        alert("No funciona, ingrese los datos correctamente")
+        throw err
+    })
+}
