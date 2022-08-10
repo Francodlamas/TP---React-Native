@@ -6,19 +6,22 @@ import { enviarEmailPsw } from '../Axios/AxiosClient';
 const Form = () => {
 
     const [aux,setAux]=useState(true);
+    const [botonActivado,setBotonActiado]=useState(true);
     const [token,setToken]=useState(true);
     const [obj, setObj] = useState({
             email: null,
             password: null,
     });
     const validar =async()=>{
+    
     if(obj.email==null || obj.password==null || obj.email==""||obj.password==""){
     setAux(false)
-    
+
     }
     else{
          setAux(true)
        setToken (await enviarEmailPsw(obj))
+       navigation.navigate('Details')
        console.log("datos ingresados")
     }
 }
@@ -42,9 +45,12 @@ const Form = () => {
                         onChangeText={(value)=>{setObj({...obj,password: value})}}       
                         value={obj.password}
                 />
+                 {!botonActivado &&
                 <Button
-                onPress={validar}
+                onPress={validar}disable
+                
                 />
+                }
 
                 
                
