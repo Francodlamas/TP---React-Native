@@ -1,7 +1,6 @@
 import React, {  useState } from 'react';
 import { TextInput,Button,StyleSheet,Text,View,Alert } from 'react-native';
-import { enviarEmailPsw } from '../Axios/AxiosClient';
-
+import { enviarEmailPsw } from '../axios/axiosClient';
 
 const Form = ({navigation}) => {
 

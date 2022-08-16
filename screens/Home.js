@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState, FlatList } from 'react';
+import { traerPlatos } from '../axios/axiosClient';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 //import React, {  useState } from 'react';
@@ -6,21 +7,47 @@ import { useNavigation } from '@react-navigation/native';
 
 const Home =({navigation})=>{
   const [buscador,setBuscador]=useState("");
-  
-  
+  const flatlist = [
+    {
+      
+      title: data.title,
+    },
+    {
+      
+      title: data.title,
+    },
+    {
+      
+      title: data.title,
+    },
+  ];
+
 
   return (
     
     <View>
-      <Text>fdsfewf</Text>
+      <Text>Datos ingresados</Text>
       <TextInput 
-      /*onChangeText={(text) => {
-        if (text.length > 2) {
-          await traerPlatos(query)
+      onChangeText={(letras) => {
+        if (letras.length > 2) {
+          traerPlatos(letras).then((data) => {
+            setBuscador(data)
+            console.log(data)
+          })
+          
         }
-      }}*/ 
-      value={buscador}
+      }}
+     
       />
+   
+   <SafeAreaView>
+      <FlatList
+        data={flatlist}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
+
 
 
 
