@@ -1,15 +1,17 @@
 import React, {  useState } from 'react';
 import { TextInput,Button,StyleSheet,Text,View,Alert } from 'react-native';
 import { enviarEmailPsw } from '../axios/axiosClient';
+import {useContextState, ActionTypes} from '../contextState'
+
+
 
 const Form = ({navigation}) => {
-
+    const {contextState,setContextState}=useContextState();
     const [aux,setAux]=useState(true);
     const [botonActivado,setBotonActiado]=useState(true);
-    const [token,setToken]=useState(true);
     const [obj, setObj] = useState({
-            email: "",
-            password: "",
+            email: "challenge@alkemy.org",
+            password: "react",
     });
     const validar =async()=>{
     
@@ -19,7 +21,13 @@ const Form = ({navigation}) => {
     }
     else{
          setAux(true)
-       setToken (await enviarEmailPsw(obj))
+         const token=await enviarEmailPsw(obj)
+         console.log(token)
+         setContextState({
+            type: ActionTypes.SetToken,
+            value:token,
+         });
+       console.log(contextState.token)
        navigation.push('Home')
        console.log("datos ingresados")
     }
@@ -41,6 +49,7 @@ const Form = ({navigation}) => {
                         onChangeText={(value)=>{setObj({...obj,password: value})}}       
                         value={obj.password}
                 />
+                
                 <Button style={styles.button}
                 onPress={validar}
                 title="press"
