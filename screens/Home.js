@@ -9,46 +9,40 @@ import {useContextState, ActionTypes, contextState} from '../contextState'
 const Home =({navigation})=>{
   //const {contextState,setContextState}=useContextState();
   const [buscador,setBuscador]=useState("");
-  const data= [
-    { 
-      title: "data.title 1",
-    },
-    { 
-      title: "data.title 2",
-    },
-    { 
-      title: "data.title 3",
-    },
-  ];
+  const [platos,setPlatos]=useState([]);
   
-  const renderItem = ({ item }) => (
-
-      <Text >{item.title}</Text>
+  
+  const renderItem = ({ platos }) => (
+      
+      <Text >{platos}</Text>
+      
     
   );
-
+  const onChange = async (letras) => {
+    if (letras.length > 2) {
+    const data = await traerPlatos(letras);
+    setPlatos(data);
+    console.log(platos)
+  }
+    
+}
 
   return (
     
     <View>
       <Text>Datos ingresados</Text>
       <TextInput 
-      onChangeText={(letras) => {
-        if (letras.length > 2) {
-          traerPlatos(letras).then((data) => {
-            setBuscador(data)
-            console.log(data)
-          })
-        }
-      }}
+      onChangeText={onChange}
       />
       <FlatList
         numColumns={4}
-        keyExtractor={(item) => item.title}
-        data={data}
+        data={platos}
+        keyExtractor={(data) => data.title}
         renderItem={renderItem}
       />
-      
+                
+
+            
     </View>  
   ); 
 }
