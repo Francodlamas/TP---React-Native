@@ -23,7 +23,7 @@ export const enviarEmailPsw= async (obj) =>{
     })
 }
 export const traerPlatos= async (query) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=bb614d1a2cfe4751b4f2aea0a3844a1c&query=${query}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=3849d5e848fa40fb82606c512a500d64&query=${query}`,{})
     .then(function(res){
         console.log(res.data.results)
         return res.data.results

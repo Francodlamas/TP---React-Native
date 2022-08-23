@@ -8,29 +8,32 @@ import {useContextState, ActionTypes} from '../contextState'
 const Form = ({navigation}) => {
     const {contextState,setContextState}=useContextState();
     const [aux,setAux]=useState(true);
-    const [botonActivado,setBotonActiado]=useState(true);
+    const [cargar, setCargar] = useState(false);
     const [obj, setObj] = useState({
             email: "challenge@alkemy.org",
             password: "react",
     });
     const validar =async()=>{
-    
+    setCargar(true);
     if( obj.email==""||obj.password==""){
     setAux(false)
-    setBotonActiado(true)
     }
     else{
          setAux(true)
-         const token=await enviarEmailPsw(obj)
-         console.log(token)
-         setContextState({
-            type: ActionTypes.SetToken,
-            value:token,
-         });
-       console.log(contextState.token)
-       navigation.push('Home')
-       console.log("datos ingresados")
+         try {
+            const token =await enviarEmailPsw(obj)
+            console.log(token)
+            setContextState({
+               type: ActionTypes.SetToken,
+               value:token,
+            });
+            navigation.push('Home')
+         } catch (err) {
+            console.log("error: ", err)
+            setCargar(false)
+         }
     }
+    setCargar(false);
 }
 
     return (      
@@ -53,11 +56,28 @@ const Form = ({navigation}) => {
                 <Button style={styles.button}
                 onPress={validar}
                 title="press"
-                disabled={!botonActivado}
+
+                disabled={cargar}
                 />
                 
            </View>            
         )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         
 }
 
