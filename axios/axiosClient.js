@@ -23,7 +23,7 @@ export const enviarEmailPsw= async (obj) =>{
     })
 }
 export const traerPlatos= async (query) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=3849d5e848fa40fb82606c512a500d64&query=${query}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=2532bbe5775d49d8adb09fcabb7184fe&query=${query}`,{})
     .then(function(res){
         console.log(res.data.results)
         return res.data.results
@@ -31,4 +31,15 @@ export const traerPlatos= async (query) =>{
     .catch(function(){
         throw "Error"
     })
+}
+export const detallePlato= async (id) =>{
+    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=2532bbe5775d49d8adb09fcabb7184fe`,{})
+    .then(function(res){
+        console.log(res.data.results)
+        return res.data.results
+    })
+    .catch(function(){
+        throw "Error"
+    })
+    
 }

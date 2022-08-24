@@ -2,7 +2,7 @@ import React, {  useState } from 'react';
 import { TextInput,Button,StyleSheet,Text,View,Alert } from 'react-native';
 import { enviarEmailPsw } from '../axios/axiosClient';
 import {useContextState, ActionTypes} from '../contextState'
-
+import { useNavigation } from '@react-navigation/native';
 
 
 const Form = ({navigation}) => {
