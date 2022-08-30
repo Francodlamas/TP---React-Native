@@ -10,7 +10,8 @@ const Home =({navigation})=>{
   //const {contextState,setContextState}=useContextState();
   const [buscador,setBuscador]=useState("");
   const [platos,setPlatos]=useState([]);
-  
+  const {contextState,setContextState}=useContextState();
+
   const renderItem = ({ item }) => {
     return <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Info',{id:item.id})}>
       <Text style={styles.title}>{item.title}</Text>
@@ -37,7 +38,8 @@ const Home =({navigation})=>{
 
   return (
     
-    <View >
+    <View > 
+      <Text>{contextState.plato.titulo}</Text>
       <Text>Datos ingresados</Text>
       <TextInput 
       onChangeText={onChange}
@@ -52,7 +54,7 @@ const Home =({navigation})=>{
         />
         </SafeAreaView>
 
-            
+           
     </View>  
   ); 
 }

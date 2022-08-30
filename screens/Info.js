@@ -8,10 +8,36 @@ import { detallePlato } from '../axios/axiosClient';
 const Info = ({navigation,route}) => {
     
     const [plato,setPlato]=useState("");
-   
+    const {contextState,setContextState}=useContextState();
+    const Casa =({plato})=>{
+      console.log(plato.title)
+          setContextState({
+          type: ActionTypes.SetTitulo,
+          value:plato.title,
+          });
+          setContextState({
+          type: ActionTypes.SetImage,
+          value:plato.image,
+          });
+          setContextState({
+          type: ActionTypes.SetPrecioPorUnidad,
+          value:plato.pricePerServing,
+          });
+          setContextState({
+            type: ActionTypes.SetSano,
+            value:plato.healthScore,
+          });
+          setContextState({
+            type: ActionTypes.SetVegano,
+            value:plato.vegan,
+          });
+          setContextState({
+            type: ActionTypes.SetVegetariano,
+            value:plato.vegetarian,
+      });
 
-    const Casa =async()=>{
-                navigation.push('Home')
+
+navigation.push('Home')
     }
 
     useEffect (async() => {
