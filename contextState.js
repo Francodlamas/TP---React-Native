@@ -3,6 +3,14 @@ import {useContext} from "react";
 export const initialState={
     loading:true,
     token:'',
+    plato:{
+        titulo:'',
+        image:'',
+        precioPorUnidad,
+        sano:0,
+        vegano:false,
+        vegetariano:false,
+    }
 };
 
 export const ActionTypes={

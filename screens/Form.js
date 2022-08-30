@@ -55,7 +55,7 @@ const Form = ({navigation}) => {
                 
                 <Button style={styles.button}
                 onPress={validar}
-                title="press"
+                title="Press"
 
                 disabled={cargar}
                 />

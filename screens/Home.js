@@ -21,9 +21,9 @@ const Home =({navigation})=>{
           uri: item.image.toString(),
         }} >
         </Image>
-       
-      
+ 
     </TouchableOpacity>
+   
   };
 
   const onChange = async (letras) => {
@@ -44,9 +44,9 @@ const Home =({navigation})=>{
       />
        <SafeAreaView style={styles.container}>
         <FlatList 
-          numColumns={999}
+         
           data={platos}
-          horizontal={false}
+          
           keyExtractor={(data) => data.title}
           renderItem={renderItem}
         />
@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
+
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 12,
+    marginHorizontal: 16,
   },
   title: {
     fontSize: 15,
