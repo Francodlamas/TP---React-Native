@@ -18,6 +18,18 @@ const Info = ({navigation,route}) => {
       console.log(contextState.menu.platos[1])
       navigation.push('Home')
     }
+    const eliminarPlato =()=>{
+      const id= route.params.id;
+      const indexPlato=contextState.menu.platos.findIndex(idPlato=>idPlato===id)
+      contextState.menu.platos = [
+        ...contextState.menu.platos.slice(0, indexPlato),
+        ...contextState.menu.platos.slice(indexPlato + 1),
+    ];
+    console.log(contextState.menu.platos)
+   
+
+      navigation.push('Home')
+    }
 
     useEffect (async () => {
         console.log(route.params.id)
@@ -41,13 +53,10 @@ return (
     <Text>Precio por unidad: {plato.pricePerServing}</Text>
     {plato.vegan ? <Text>El plato es vegano</Text>:<Text>El plato no es vegano</Text>}
     {plato.vegetarian ? <Text>El plato es vegetariano</Text>:<Text>El plato no es vegetariano</Text>}
+    {contextState.menu.platos.find(p => p.id === route.params.id) ? <Button style={styles.button}title="Eliminar"onPress={eliminarPlato}/> : <Button style={styles.button}title="Agregar"onPress={agregarPlato}/>}
 
-    <Button style={styles.button}
-                
-                title="Agregar"
-                onPress={agregarPlato}
-               
-                />
+
+    
     </View> 
 )
 

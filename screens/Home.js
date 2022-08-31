@@ -11,7 +11,7 @@ const Home =({navigation})=>{
   const [buscador,setBuscador]=useState("");
   const [platos,setPlatos]=useState([]);
   const {contextState,setContextState}=useContextState();
-
+  console.log(contextState.menu.platos)
   const renderItem = ({ item }) => {
     return <TouchableOpacity style={styles.item} onPress={() => {
       console.log(item.id)
@@ -29,6 +29,26 @@ const Home =({navigation})=>{
     </TouchableOpacity>
    
   };
+  const renderItem2 = ({ item }) => {
+    return <TouchableOpacity style={styles.item} onPress={() => {
+      console.log(item.title)
+      navigation.navigate('Info',{id:item.id})}
+      }>
+      <Text style={styles.title}>{item.title}</Text>
+      <Image 
+    
+      style={styles.tinyLogo}
+      source={{
+          uri: item?.image?.toString(),
+        }} >
+        </Image>
+        <Button onPress={() => navigation.navigate('Info',{id:item?.id})}></Button>
+        
+    </TouchableOpacity>
+   
+  };
+
+
 
   const onChange = async (letras) => {
     if (letras.length > 2) {  
@@ -42,13 +62,13 @@ const Home =({navigation})=>{
   return (
     
     <View > 
-      <Image 
-      style={styles.tinyLogo}
-      source={{
-          uri: contextState.menu?.platos[0]?.image.toString(),
-        }}></Image>
-      <Text>{contextState.menu?.platos[0]?.title}</Text>
-      <Button onPress={() => navigation.navigate('Info',{id:contextState.menu?.platos[0]?.id})}></Button>
+      <SafeAreaView style={styles.container}>
+      <FlatList
+        data={contextState.menu.platos}
+        renderItem={renderItem2}
+        keyExtractor={(data) => data.title}
+      />
+    </SafeAreaView>
       <Text>Datos ingresados</Text>
       <TextInput 
       onChangeText={onChange}

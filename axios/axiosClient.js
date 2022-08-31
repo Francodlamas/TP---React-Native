@@ -3,7 +3,7 @@ import axios from "axios";
 const axiosClient = axios.create({
     baseURL: "http://challenge-react.alkemy.org/"
 })
-const apiKey = "2f34f3b6abb54bc48a7dacd61c0353e9"
+const apiKey = "2532bbe5775d49d8adb09fcabb7184fe"
 
 export const enviarEmailPsw= async (obj) =>{
     return axiosClient.post('', {
