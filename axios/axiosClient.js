@@ -3,6 +3,7 @@ import axios from "axios";
 const axiosClient = axios.create({
     baseURL: "http://challenge-react.alkemy.org/"
 })
+const apiKey = "2f34f3b6abb54bc48a7dacd61c0353e9"
 
 export const enviarEmailPsw= async (obj) =>{
     return axiosClient.post('', {
@@ -23,7 +24,7 @@ export const enviarEmailPsw= async (obj) =>{
     })
 }
 export const traerPlatos= async (query) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=8e4503d480764560984c77bb4ac044db&query=${query}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`,{})
     .then(function(res){
         console.log(res.data.results)
         return res.data.results
@@ -33,7 +34,7 @@ export const traerPlatos= async (query) =>{
     })
 }
 export const detallePlato= async (id) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=8e4503d480764560984c77bb4ac044db`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`,{})
     .then(function(res){
         console.log(res.data)
         return res.data

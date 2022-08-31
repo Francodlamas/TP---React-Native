@@ -39,7 +39,7 @@ const Form = ({navigation}) => {
     return (      
             <View style={styles.container}>
                 
-                <Text style={styles.iniciarSesion}>Iniciar Sesíon</Text><br></br>
+                <Text style={styles.iniciarSesion}>Iniciar Sesión</Text><br></br>
                 {!aux &&
                     <Text>No ingreso los valores correspondientes</Text>
                 }

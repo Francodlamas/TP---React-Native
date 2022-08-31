@@ -3,17 +3,20 @@ import { traerPlatos } from '../axios/axiosClient';
 import { StyleSheet, Text, Image , View, TextInput, FlatList, StatusBar, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {useContextState, ActionTypes, contextState} from '../contextState'
-//import React, {  useState } from 'react';
+import { Button } from 'react-native-web';
+
 
 
 const Home =({navigation})=>{
-  //const {contextState,setContextState}=useContextState();
   const [buscador,setBuscador]=useState("");
   const [platos,setPlatos]=useState([]);
   const {contextState,setContextState}=useContextState();
 
   const renderItem = ({ item }) => {
-    return <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Info',{id:item.id})}>
+    return <TouchableOpacity style={styles.item} onPress={() => {
+      console.log(item.id)
+      navigation.navigate('Info',{id:item.id})}
+      }>
       <Text style={styles.title}>{item.title}</Text>
       <Image 
     
@@ -39,19 +42,26 @@ const Home =({navigation})=>{
   return (
     
     <View > 
-      <Text>{contextState.plato.titulo}</Text>
+      <Image 
+      style={styles.tinyLogo}
+      source={{
+          uri: contextState.menu?.platos[0]?.image.toString(),
+        }}></Image>
+      <Text>{contextState.menu?.platos[0]?.title}</Text>
+      <Button onPress={() => navigation.navigate('Info',{id:contextState.menu?.platos[0]?.id})}></Button>
       <Text>Datos ingresados</Text>
       <TextInput 
       onChangeText={onChange}
       />
+  
+      
        <SafeAreaView style={styles.container}>
         <FlatList 
-         
           data={platos}
-          
           keyExtractor={(data) => data.title}
           renderItem={renderItem}
         />
+        
         </SafeAreaView>
 
            

@@ -9,48 +9,23 @@ const Info = ({navigation,route}) => {
     
     const [plato,setPlato]=useState("");
     const {contextState,setContextState}=useContextState();
-    const Casa =({plato})=>{
+    const agregarPlato =()=>{
       console.log(plato.title)
-          setContextState({
-          type: ActionTypes.SetTitulo,
-          value:plato.title,
-          });
-          setContextState({
-          type: ActionTypes.SetImage,
-          value:plato.image,
-          });
-          setContextState({
-          type: ActionTypes.SetPrecioPorUnidad,
-          value:plato.pricePerServing,
-          });
-          setContextState({
-            type: ActionTypes.SetSano,
-            value:plato.healthScore,
-          });
-          setContextState({
-            type: ActionTypes.SetVegano,
-            value:plato.vegan,
-          });
-          setContextState({
-            type: ActionTypes.SetVegetariano,
-            value:plato.vegetarian,
-      });
-
-
-navigation.push('Home')
+      setContextState({
+        type: ActionTypes.SetMenuPlatos,
+        value:plato,
+        });
+      console.log(contextState.menu.platos[1])
+      navigation.push('Home')
     }
 
-    useEffect (async() => {
+    useEffect (async () => {
         console.log(route.params.id)
         const id= route.params.id;
         const data = await detallePlato(id); 
         console.log(data);
         setPlato(data);
-        
-    
-    
-    console.log(plato.pricePerServing)
-    },[]);
+    },[route.params.id]);
 
 return (      
     <View>
@@ -70,7 +45,7 @@ return (
     <Button style={styles.button}
                 
                 title="Agregar"
-                onPress={Casa}
+                onPress={agregarPlato}
                
                 />
     </View> 
